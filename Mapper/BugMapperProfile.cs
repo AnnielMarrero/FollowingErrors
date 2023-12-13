@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FollowingErrors.Dtos;
 using FollowingErrors.Entities;
-using System.Drawing.Drawing2D;
 
 namespace FollowingErrors.Mapper
 {

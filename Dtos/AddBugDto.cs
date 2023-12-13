@@ -6,8 +6,6 @@ namespace FollowingErrors.Dtos
     {
         public required string Description { get; set; }
 
-       
-
         public int UserId { get; set; }
         public int ProjectId { get; set; }
     }

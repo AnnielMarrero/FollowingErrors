@@ -13,19 +13,20 @@ namespace FollowingErrors.Controllers
     {
         readonly BugsManager _db;
         readonly IMapper _mapper;
+
         public BugsController(BugsManager db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
-
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] BugFilter filters)
         {
-           //it's better using services instead of charge the controller 
+            //it's better using services instead of charge the controller
             var bugs = _db.Bug.AsNoTracking();
             if (filters.UserId != null)
-                bugs = bugs.Where( _ => _.UserId == filters.UserId);
+                bugs = bugs.Where(_ => _.UserId == filters.UserId);
             if (filters.ProjectId != null)
                 bugs = bugs.Where(_ => _.ProjectId == filters.ProjectId);
             if (filters.StartDate != null)
@@ -35,7 +36,9 @@ namespace FollowingErrors.Controllers
 
             bugs = bugs.Include(_ => _.User).Include(_ => _.Project);
             var bugsDto = await bugs.ToListAsync();
-            return bugsDto.Count == 0 ? NotFound("Any data match the filters") : Ok(new { bugs= _mapper.Map<ICollection<BugDto>>(bugsDto) } );
+            return bugsDto.Count == 0
+                ? NotFound("Any data match the filters")
+                : Ok(new { bugs = _mapper.Map<ICollection<BugDto>>(bugsDto) });
         }
 
         [HttpPost]
@@ -51,11 +54,15 @@ namespace FollowingErrors.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return await _db.Bug.AsNoTracking().Include(_ => _.Project).Include(_ => _.User)
-                .FirstOrDefaultAsync(model => model.Id == id)
-                is Bug model
-                    ? Ok(_mapper.Map<BugDto>(model))
-                    : NotFound();
+            return
+                await _db.Bug
+                    .AsNoTracking()
+                    .Include(_ => _.Project)
+                    .Include(_ => _.User)
+                    .FirstOrDefaultAsync(model => model.Id == id)
+                    is Bug model
+                ? Ok(_mapper.Map<BugDto>(model))
+                : NotFound();
         }
     }
 }

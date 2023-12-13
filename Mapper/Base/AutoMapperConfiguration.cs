@@ -4,7 +4,6 @@ namespace FollowingErrors.Mapper.Base
 {
     public static class AutoMapperConfiguration
     {
-
         public static void AddAutoMappers(
             this IServiceCollection services,
             MapperConfigurationExpression cfg
@@ -27,5 +26,4 @@ namespace FollowingErrors.Mapper.Base
             return new MapperConfigurationExpression();
         }
     }
-
 }

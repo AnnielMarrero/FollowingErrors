@@ -14,8 +14,5 @@ namespace FollowingErrors.Entities
 
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; } = default!;
-
-
-
     }
 }

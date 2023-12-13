@@ -7,5 +7,4 @@
 
         public ICollection<Bug> Bugs { get; set; } = new HashSet<Bug>();
     }
-
 }
