@@ -14,6 +14,6 @@ public class BugsManager : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Bug>().HasIndex(_ => new { _.ProjectId, _.UserId }).IsUnique();
+        
     }
 }
